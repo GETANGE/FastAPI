@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DialyzerSettings">
+    <option name="currentPltPath" value="$PROJECT_DIR$" />
+  </component>
+  <component name="EmacsSettings">
+    <option name="emacsPath" value="$PROJECT_DIR$" />
+  </component>
+</project>
