@@ -1,9 +1,8 @@
 services:
-  # A Docker web service
   - type: web
     name: model-deployment
     runtime: python
     plan: free
     autoDeploy: false
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt gunicorn  # Add gunicorn here
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
