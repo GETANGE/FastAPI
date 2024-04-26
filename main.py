@@ -5,6 +5,7 @@ import numpy as np
 from io import BytesIO
 from PIL import Image
 import tensorflow as tf
+import os
 
 # Keeping CORS middleware for potential cross-origin requests
 app = FastAPI()
@@ -91,4 +92,6 @@ async def predict(
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='localhost', port=8000)
+    # Get the port number from the environment variable or use a default value
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host='localhost', port=port)
