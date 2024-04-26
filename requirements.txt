@@ -1,6 +1,5 @@
 fastapi
 uvicorn
 numpy
-BytesIO
 Pillow  # PIL fork
 tensorflow
