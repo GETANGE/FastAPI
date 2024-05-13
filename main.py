@@ -10,15 +10,19 @@ import os
 # Keeping CORS middleware for potential cross-origin requests
 app = FastAPI()
 
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-]
+origins = ["*"]  # Allowing requests from any origin
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], 
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
@@ -55,24 +59,17 @@ async def predict(
         # Make prediction using the model layer
         predictions = model_layer(img_batch)
 
-        # Check if predictions is a dictionary
-        if isinstance(predictions, dict):
-            # Handle the case when predictions is a dictionary but doesn't contain the expected key 'class'
-            predicted_class_index = np.argmax(predictions['dense_1'].numpy())
-            predicted_class = CLASS_NAMES[predicted_class_index]
-            confidence = float(predictions['dense_1'][0][predicted_class_index])  # Access confidence value
-        else:
-            # Convert predictions tensor to NumPy array
-            predictions_array = predictions['dense_1'].numpy()
+        # Convert predictions tensor to NumPy array
+        predictions_array = predictions['dense_1'].numpy()
 
-            # Get the predicted class and confidence
-            predicted_class_index = np.argmax(predictions_array)
-            predicted_class = CLASS_NAMES[predicted_class_index]
-            confidence = float(predictions_array[0][predicted_class_index])  # Access confidence value
+        # Get the predicted class index and confidence
+        predicted_class_index = np.argmax(predictions_array)
+        predicted_class = CLASS_NAMES[predicted_class_index]
+        confidence = float(predictions_array[0][predicted_class_index])  # Access confidence value
 
-        # Check if the predicted class is within the defined class names
-        if predicted_class not in CLASS_NAMES:
-            predicted_class = "Not classified yet"
+        # Check if the predicted class is an apple leaf
+        if "Apple" not in predicted_class:
+            predicted_class = "Not an apple leaf"
             confidence = 0.0
 
         # Now, create the response dictionary
@@ -86,7 +83,7 @@ async def predict(
 
     except Exception as e:
         # Handle any errors that occur during prediction
-        error_message = f"Upload an image to classify: "
+        error_message = f"Error during prediction: {str(e)}"
         # Return an error response
         return {"error": error_message}
 
