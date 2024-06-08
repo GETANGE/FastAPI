@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 # Path to the saved model file
-saved_model_path = '/Models/AppleDiseaseModel1.h5'
+saved_model_path = 'Models/AppleDiseaseModel1.h5'
 
 # Load the model
 model = tf.keras.models.load_model(saved_model_path)
