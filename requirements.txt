@@ -4,3 +4,4 @@ numpy
 Pillow  # PIL fork
 tensorflow
 python-multipart
+slowapi
