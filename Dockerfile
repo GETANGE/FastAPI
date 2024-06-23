@@ -8,7 +8,10 @@ COPY ./requirements.txt /code/requirements.txt
 
 # Install additional dependencies
 
-RUN pip install --upgrade pip  # Ensure pip is up-to-date
+RUN pip install --upgrade pip  # Ensure pip is up-to-
+    
+# Copy the model file into the container
+COPY ./Models/AppleDiseaseModel1.h5 /code/Models/AppleDiseaseModel1.h5
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Copy application code
