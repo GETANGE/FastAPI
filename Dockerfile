@@ -7,6 +7,7 @@ WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
 
 # Install additional dependencies
+RUN pip install h5py
 RUN pip install --upgrade pip  # Ensure pip is up-to-date
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
