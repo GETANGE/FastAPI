@@ -2,6 +2,6 @@ fastapi
 uvicorn
 numpy
 Pillow  # PIL fork
-tensorflow
+tensorflow>=2.5.0,<2.17.0
 python-multipart
 slowapi
