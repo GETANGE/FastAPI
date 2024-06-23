@@ -5,3 +5,4 @@ Pillow  # PIL fork
 tensorflow>=2.5.0,<2.17.0
 python-multipart
 slowapi
+h5py
