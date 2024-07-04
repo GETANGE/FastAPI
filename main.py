@@ -80,9 +80,9 @@ async def predict(request: Request, file: UploadFile = File(...)):
 
     except Exception as e:
         # Handle any errors that occur during prediction
-        error_message = f"An error occurred: {str(e)}"
+        error_message = f"This is not an apple-leaf"
         # Return an error response
-        return {"error": error_message}
+        return JSONResponse(status_code=400, content={"error": error_message})
 
 def rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded):
     response = JSONResponse(
